@@ -1,0 +1,3 @@
+[submodule "third-party/userland"]
+	path = third-party/userland
+	url = https://github.com/raspberrypi/userland.git
