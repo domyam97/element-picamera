@@ -17,14 +17,20 @@ services:
                 build:
                         context: .
                         dockerfile: Dockerfile
+                environment:
+                        - LD_LIBRARY_PATH
 
                 volumes:
                         - type: volume
                           source: shared
                           target: /shared
                           volume:
-                                  nocopy: true
+                                  nocopy: true          
+                        - ".:/code"
+                devices:
+                        - "/dev/vchiq:/dev/vchiq"
                         - "/dev/video0:/dev/video0"
+                privileged: true
                 depends_on:
                         - "nucleus-arm"
 

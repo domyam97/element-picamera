@@ -11,22 +11,18 @@ ADD . /code
 RUN pip3 install wheel
 RUN pip3 install picamera[array]
 
-# add a docker user
+# try to compile userland
+WORKDIR /code/third-party/userland
+RUN chmod +x buildme
+RUN ./buildme --aarch64
 
-# RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo && adduser docker video
-# RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN export PATH=$PATH:/opt/vc/bin && echo $PATH
+#RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH/opt/vc/lib && echo $LD_LIBRARY_PATH
 
-# USER docker
-
+RUN ldconfig
 
 WORKDIR /code
-
 RUN chmod +x launch.sh
-
-# try to compile userland
-RUN chmod +x third-party/userland/buildme
-RUN third-party/userland/buildme --aarch64
-
 CMD ["/bin/bash", "launch.sh"]
 
 
