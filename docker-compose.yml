@@ -13,19 +13,18 @@ services:
                                   nocopy: true
 
         picamera:
-                container_name: test_cont
+                container_name: picamera
                 build:
                         context: .
                         dockerfile: Dockerfile
                 environment:
                         - LD_LIBRARY_PATH
-
                 volumes:
                         - type: volume
                           source: shared
                           target: /shared
                           volume:
-                                  nocopy: true          
+                                nocopy: true          
                         - ".:/code"
                 devices:
                         - "/dev/vchiq:/dev/vchiq"
@@ -34,6 +33,22 @@ services:
                 depends_on:
                         - "nucleus-arm"
 
+
+                          #streamviewer:
+                          #container_name: stream-viewer
+                          #image: elementaryrobotics/element-stream-viewer:test-aarch64
+                          #volumes:
+                          #- type: volume
+                          #source: shared
+                          #target: /shared
+                          #volume:
+                          #nocopy: true
+                          #- "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+                          #environment:
+                          #- "DISPLAY"
+                          #- "QT_X11_NO_MITSHM=1"
+                          #depends_on:
+                          #- "nucleus-arm"
 volumes:
         shared:
                 driver_opts:

@@ -9,7 +9,7 @@ ADD . /code
 
 # install python dependencies
 RUN pip3 install wheel
-RUN pip3 install picamera[array]
+RUN pip3 install -r /code/requirements.txt
 
 # try to compile userland
 WORKDIR /code/third-party/userland
