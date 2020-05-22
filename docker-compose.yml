@@ -16,16 +16,16 @@ services:
                 container_name: picamera
                 build:
                         context: .
+                        args:
+                                opt_libs: "/opt/vc/lib"
                         dockerfile: Dockerfile
-                environment:
-                        - LD_LIBRARY_PATH
                 volumes:
                         - type: volume
                           source: shared
                           target: /shared
                           volume:
                                 nocopy: true          
-                        - ".:/code"
+                        - "/opt/vc:/opt/vc"
                 devices:
                         - "/dev/vchiq:/dev/vchiq"
                         - "/dev/video0:/dev/video0"
@@ -34,21 +34,21 @@ services:
                         - "nucleus-arm"
 
 
-                          #streamviewer:
-                          #container_name: stream-viewer
-                          #image: elementaryrobotics/element-stream-viewer:test-aarch64
-                          #volumes:
-                          #- type: volume
-                          #source: shared
-                          #target: /shared
-                          #volume:
-                          #nocopy: true
-                          #- "/tmp/.X11-unix:/tmp/.X11-unix:rw"
-                          #environment:
-                          #- "DISPLAY"
-                          #- "QT_X11_NO_MITSHM=1"
-                          #depends_on:
-                          #- "nucleus-arm"
+        streamviewer:
+                container_name: stream-viewer
+                image: elementaryrobotics/element-stream-viewer:test-aarch64
+                volumes:
+                        - type: volume
+                          source: shared
+                          target: /shared
+                          volume:
+                                nocopy: true
+                        - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+                environment:
+                        - "DISPLAY"
+                        - "QT_X11_NO_MITSHM=1"
+                depends_on:
+                        - "nucleus-arm"
 volumes:
         shared:
                 driver_opts:
