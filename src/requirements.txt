@@ -1,0 +1,2 @@
+lazycontract==0.9.6
+picamera[array]

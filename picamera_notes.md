@@ -12,7 +12,7 @@ You need a 64-bit OS - I recommend [Ubuntu Server for Raspberry Pi](https://ubun
 
 ## Install Steps
 * use pip to install picamera package  
-* clone [Raspberrry Pi Userland](https://github.com/raspberrypi/userland) and build with --aarch64 tag  
+* go to third-party/userland and run `sudo ./buildme --aarch64`  
 * add all the stuff you built to your path  
 
 `touch ~/.bash_aliases`  
@@ -40,7 +40,7 @@ Make your new rc.local runnable
 
 `sudo usermod -a -G video $(whoami)`
 
-
+* reboot and "up" the project! (SEE README)
 
 
 

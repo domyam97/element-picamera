@@ -5,7 +5,7 @@ FROM elementaryrobotics/atom:opencv-aarch64
 
 # Lets copy over the contents of this repo into the container
 #ADD ./third-party/userland /code/third-party/userland
-ADD . /code
+ADD ./src /code
 
 # install python dependencies
 RUN pip3 install wheel
